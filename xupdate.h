@@ -23,12 +23,11 @@
 
 #include "xupdate.h"
 
-class XUpdate: public QBinary
-{
+class XUpdate : public QBinary {
     Q_OBJECT
 
 public:
     XUpdate(QIODevice *pDevice);
 };
 
-#endif // XUPDATE_H
+#endif  // XUPDATE_H
