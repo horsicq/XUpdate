@@ -20,7 +20,6 @@
  */
 #include "xupdate.h"
 
-XUpdate::XUpdate(QIODevice *pDevice)
-    : XBinary(pDevice)
+XUpdate::XUpdate(QIODevice *pDevice) : XBinary(pDevice)
 {
 }
