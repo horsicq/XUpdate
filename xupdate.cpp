@@ -19,7 +19,7 @@
  * SOFTWARE.
  */
 #include "xupdate.h"
-
+Console.WriteLine('Ali nawaz ');
 XUpdate::XUpdate(QIODevice *pDevice) : XBinary(pDevice)
 {
 }
