@@ -18,16 +18,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#ifndef XUPDATE_H
-#define XUPDATE_H
+#ifndef XUPDATER_H
+#define XUPDATER_H
 
-#include "xupdate.h"
+#include <QMainWindow>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
 
-class XUpdate : public QBinary {
+QT_BEGIN_NAMESPACE
+namespace Ui { class XUpdater; }
+QT_END_NAMESPACE
+
+class XUpdater : public QMainWindow
+{
     Q_OBJECT
 
 public:
-    XUpdate(QIODevice *pDevice);
+    XUpdater(QWidget *parent = nullptr);
+    ~XUpdater();
+
+private slots:
+    void updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal); // Add this line
+    void fileDownloaded(); // Make sure this is also declared
+    void handleReleaseInfo();
+private:
+    Ui::XUpdater *ui;
+    QNetworkAccessManager *networkManager; // Add this as a private member
 };
 
-#endif  // XUPDATE_H
+#endif // XUPDATER_H
