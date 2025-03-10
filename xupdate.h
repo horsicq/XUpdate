@@ -38,12 +38,12 @@ public:
     ~XUpdater();
 
 private slots:
-    void updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal); // Add this line
-    void fileDownloaded(); // Make sure this is also declared
+    void updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal);
+    void fileDownloaded();
     void handleReleaseInfo();
 private:
     Ui::XUpdater *ui;
-    QNetworkAccessManager *networkManager; // Add this as a private member
+    QNetworkAccessManager *networkManager;
 };
 
 #endif // XUPDATER_H
