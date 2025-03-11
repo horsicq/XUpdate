@@ -19,8 +19,8 @@
  * SOFTWARE.
  */
 
-#include "xupdater.h"
-#include "ui_xupdater.h"
+#include "xupdate.h"
+#include "ui_xupdate.h"
 #include <QTimer>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
