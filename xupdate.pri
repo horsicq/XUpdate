@@ -1,11 +1,19 @@
 INCLUDEPATH += $$PWD
 DEPENDPATH += $$PWD
 
+SOURCES += \
+    $$PWD/xupdate.cpp
+
 HEADERS += \
     $$PWD/xupdate.h
 
-SOURCES += \
-    $$PWD/xupdate.cpp
+FORMS += \
+    $$PWD/xupdate.ui
+
+!contains(XCONFIG, xshortcuts) {
+    XCONFIG += xshortcuts
+    include($$PWD/../XShortcuts/xshortcuts.pri)
+}
 
 DISTFILES += \
     $$PWD/LICENSE \
