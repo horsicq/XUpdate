@@ -126,9 +126,8 @@ XUpdate::GITHUB_RELEASE_INFO XUpdate::_parseReleaseURL(const QString &sURL)
 {
     GITHUB_RELEASE_INFO result = {};
 
-    static const QRegularExpression reReleaseUrl(
-        QStringLiteral("^https?://github\\.com/([^/]+)/([^/]+)/releases/tag/([^/?#]+)(?:[/?#].*)?$"),
-        QRegularExpression::CaseInsensitiveOption);
+    static const QRegularExpression reReleaseUrl(QStringLiteral("^https?://github\\.com/([^/]+)/([^/]+)/releases/tag/([^/?#]+)(?:[/?#].*)?$"),
+                                                 QRegularExpression::CaseInsensitiveOption);
 
     QRegularExpressionMatch match = reReleaseUrl.match(sURL.trimmed());
 
@@ -340,8 +339,7 @@ void XUpdate::process()
         QString sLocalInfoPath = QDir(record.sLocalPath).filePath(QStringLiteral("info.ini"));
 
         if (!QFile::exists(sLocalInfoPath)) {
-            emit infoMessage(tr("No local info.ini for %1. Bootstrapping from GitHub release %2.")
-                                 .arg(sFolderName, releaseInfo.sTag));
+            emit infoMessage(tr("No local info.ini for %1. Bootstrapping from GitHub release %2.").arg(sFolderName, releaseInfo.sTag));
             _downloadAndUnpack(record, releaseHeader, false);
             continue;
         }
@@ -362,9 +360,7 @@ void XUpdate::process()
                                  .arg(remoteDate.toString(QStringLiteral("yyyy-MM-dd"))));
             _downloadAndUnpack(record, releaseHeader, true);
         } else {
-            emit infoMessage((QString("%1 ") + tr("is up to date") + QString(" (%2)."))
-                                 .arg(sFolderName)
-                                 .arg(localDate.toString(QStringLiteral("yyyy-MM-dd"))));
+            emit infoMessage((QString("%1 ") + tr("is up to date") + QString(" (%2).")).arg(sFolderName).arg(localDate.toString(QStringLiteral("yyyy-MM-dd"))));
         }
     }
 }
