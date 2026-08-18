@@ -6,10 +6,8 @@ include_directories(${CMAKE_CURRENT_LIST_DIR}/../Formats/images)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/../XOptions)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/../XArchive)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos)
-include_directories(${CMAKE_CURRENT_LIST_DIR}/../XArchive/3rdparty/bzip2/src)
-include_directories(${CMAKE_CURRENT_LIST_DIR}/../XArchive/3rdparty/lzma/src)
-include_directories(${CMAKE_CURRENT_LIST_DIR}/../XArchive/3rdparty/zlib/src)
-include_directories(${CMAKE_CURRENT_LIST_DIR}/../XArchive/3rdparty/ppmd/src)
+# bzip2/lzma/zlib/ppmd headers now live together under Algos/include.
+include_directories(${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/include)
 
 include(${CMAKE_CURRENT_LIST_DIR}/../XGithub/xgithub.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/../XOptions/xoptions.cmake)
