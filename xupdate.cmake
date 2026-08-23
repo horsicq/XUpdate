@@ -55,6 +55,10 @@ set(XUPDATE_SOURCES
     ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xit214decoder.h
     ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xlzhdecoder.cpp
     ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xlzhdecoder.h
+    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xkwajlzssdecoder.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xkwajlzssdecoder.h
+    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xkwajlzhdecoder.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xkwajlzhdecoder.h
     ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xlzmadecoder.cpp
     ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xlzmadecoder.h
     ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xlzodecoder.cpp
