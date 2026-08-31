@@ -4,92 +4,21 @@ include_directories(${CMAKE_CURRENT_LIST_DIR}/../Formats/exec)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/../Formats/formats)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/../Formats/images)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/../XOptions)
-include_directories(${CMAKE_CURRENT_LIST_DIR}/../XArchive)
-include_directories(${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos)
-# bzip2/lzma/zlib/ppmd headers now live together under Algos/include.
-include_directories(${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/include)
 
 include(${CMAKE_CURRENT_LIST_DIR}/../XGithub/xgithub.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/../XOptions/xoptions.cmake)
 
+# XUpdate downloads ZIP packages and therefore needs the complete ZIP core.
+# Keep that dependency composed through xzip.cmake: it owns XArchive/XZip,
+# their family classifiers, shared Formats/XDEX helpers and every decoder
+# reachable from XDecompress. A hand-picked copy of that source list drifted
+# out of sync and made this standalone consumer fail to compile.
+include(${CMAKE_CURRENT_LIST_DIR}/../XArchive/xzip.cmake)
+
 set(XUPDATE_SOURCES
     ${CMAKE_CURRENT_LIST_DIR}/xupdate.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../Formats/xbinary.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../Formats/xbinary.h
-    ${CMAKE_CURRENT_LIST_DIR}/../Formats/xbinary_def.h
-    ${CMAKE_CURRENT_LIST_DIR}/../Formats/subdevice.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../Formats/subdevice.h
-    ${CMAKE_CURRENT_LIST_DIR}/../Formats/xiodevice.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../Formats/xiodevice.h
-    ${CMAKE_CURRENT_LIST_DIR}/../Formats/images/xpng.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../Formats/images/xpng.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/xarchive.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/xarchive.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/xcompress.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/xcompress.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/xdecompress.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/xdecompress.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/xzip.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/xzip.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xaesdecoder.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xaesdecoder.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xarjdecoder.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xarjdecoder.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xacedecoder.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xacedecoder.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xascii85decoder.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xascii85decoder.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xbcj2decoder.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xbcj2decoder.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xbrotlidecoder.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xbrotlidecoder.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xbzip2decoder.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xbzip2decoder.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xcompressdecoder.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xcompressdecoder.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xdeflatedecoder.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xdeflatedecoder.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/ximplodedecoder.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/ximplodedecoder.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xit214decoder.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xit214decoder.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xlzhdecoder.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xlzhdecoder.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xkwajlzssdecoder.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xkwajlzssdecoder.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xkwajlzhdecoder.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xkwajlzhdecoder.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xlzmadecoder.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xlzmadecoder.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xlzodecoder.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xlzodecoder.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xlzssdecoder.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xlzssdecoder.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xlzwdecoder.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xlzwdecoder.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xppmd7model.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xppmd7model.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xppmddecoder.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xppmddecoder.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xppmdmodel.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xppmdmodel.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xppmdrangedecoder.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xppmdrangedecoder.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xrardecoder.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xrardecoder.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xreducedecoder.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xreducedecoder.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xsha256decoder.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xsha256decoder.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xshrinkdecoder.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xshrinkdecoder.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xstoredecoder.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xstoredecoder.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xzipcryptodecoder.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xzipcryptodecoder.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xzstddecoder.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/xzstddecoder.h
-    ${CMAKE_CURRENT_LIST_DIR}/../XArchive/Algos/zstddeclib.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/xupdate.h
+    ${XZIP_SOURCES}
     ${XGITHUB_SOURCES}
     ${XOPTIONS_SOURCES}
 )

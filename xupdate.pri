@@ -3,7 +3,6 @@ DEPENDPATH += $$PWD
 
 include($$PWD/../XArchive/xarchive.pri)
 include($$PWD/../XGithub/xgithub.pri)
-include($$PWD/../XOptions/xoptions.pri)
 
 HEADERS += \
     $$PWD/xupdate.h

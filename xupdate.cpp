@@ -265,7 +265,7 @@ bool XUpdate::_downloadAndUnpack(const RECORD &record, const XGitHub::RELEASE_HE
             QTemporaryDir unpackDir(QDir(sTempDir).filePath(QStringLiteral("xupdate_unpack_XXXXXX")));
 
             if (unpackDir.isValid()) {
-                bSuccess = xzip.unpackToFolder(unpackDir.path(), QMap<XBinary::UNPACK_PROP, QVariant>(), &pdStruct);
+                bSuccess = xzip.unpackToFolder(unpackDir.path(), &pdStruct);
 
                 if (bSuccess) {
                     QString sSourcePath = unpackDir.path();
